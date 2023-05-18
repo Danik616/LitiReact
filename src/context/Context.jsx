@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const Context = createContext();
 
-export function contextProvider(props) {
+export function ContextProvider(props) {
 
   return (
     <Context.Provider
