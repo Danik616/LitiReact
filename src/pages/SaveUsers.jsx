@@ -7,20 +7,21 @@ import { useNavigate } from "react-router-dom";
 function SaveUsers() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rol, setRol] = useState(0);
+  const [role, setRol] = useState(0);
   const {manejarSubmitSave} = useContext(Context)
   let navigate = useNavigate();
 
   function handlerSubmit(e) {
     e.preventDefault();
-    if(manejarSubmitSave({ email, password, rol }) === 200){
-      navigate("/list-users")
-    }else if(manejarSubmitSave({ email, password, rol }) === 401){
-      console.log("No admitido")
-    }
-    setEmail("");
-    setPassword("");
-    setRol("");
+    manejarSubmitSave({ email, password, role }).then((code) => {
+      if (code === "Accepted") {
+        navigate("/list-users")
+      } else if (code === "Unauthorized") {
+        console.log("No admitido");
+      } else if(response.statusText === "Bad Request"){
+        console.log("Usuario existente")
+      }
+    })
   }
 
   return (
@@ -40,7 +41,7 @@ function SaveUsers() {
           type="number"
           placeholder="Rol"
           onChange={(e) => setRol(e.target.value)}
-          value={rol}
+          value={role}
           required
         />
 

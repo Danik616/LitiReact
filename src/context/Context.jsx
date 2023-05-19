@@ -12,21 +12,27 @@ export function ContextProvider(props) {
   }
 
   function manejarSubmitSave(form) {
-    axios
+    return new Promise((resolve, reject)=>{
+      let code=""
+      axios
       .post(baseURL + "save", form)
       .then((response) => {
         console.log(response);
-        if (response.status === 200) {
-          return 201;
-        } else if (response.status === 401) {
-          console.log("No admitido");
-          return 401;
+        if (response.statusText === "Accepted") {
+          code=response.statusText
+        } else if (response.statusText === "Unauthorized") {
+          code=response.statusText
+        } else if(response.statusText === "Bad Request"){
+          code=response.statusText
         }
+        resolve(code)
       })
       .catch((err) => {
+        code="Unauthorized"
+        resolve(code)
         console.log(err);
-        return 401;
-      });
+      })
+    })
   }
 
   function manejarSubmitLogin(form) {
@@ -38,7 +44,6 @@ export function ContextProvider(props) {
         if (response.statusText === "OK") {
           code=response.statusText
         } else if (response.statusText == "Unauthorized") {
-          console.log("No admitido");
           code=response.statusText
         }
         resolve(code)
