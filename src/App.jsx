@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserList from "./pages/Listar";
 import Login from "./pages/Login";
 import SaveUsers from "./pages/SaveUsers";
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => {
   return (
