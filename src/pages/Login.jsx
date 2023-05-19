@@ -1,30 +1,23 @@
-import axios from "axios";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom"
-const baseURL="http://192.168.20.50:8080/login"
-const Login = (props) => {
+
+import {useState, useContext} from "react";
+import { useNavigate } from "react-router-dom";
+import { Context } from "../context/Context"
+
+const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    let navigate=useNavigate()
+    const {manejarSubmitLogin} = useContext(Context)
+    let navigate = useNavigate();
 
     function handlerSubmit(e){
         e.preventDefault()
-        manejarSubmit({email, password})
+        if(manejarSubmitLogin({email, password}) === 200){
+            navigate("/list-users")
+        }else if(manejarSubmitLogin({email, password})===401){
+            console.log("No admitido")
+        }
         setEmail("")
         setPassword("")
-    }
-
-    function manejarSubmit(form){
-        axios.post(baseURL, form).then((response)=>{
-            console.log(response)
-            if (response.status === 200) {
-                navigate("/list-users")
-            } else if(response.status === 401){
-                console.log("No admitido")
-            }
-        }).catch(err => {
-            console.log(err)
-        })
     }
 
     return (

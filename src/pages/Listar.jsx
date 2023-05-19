@@ -1,32 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { Context } from "../context/Context"
+import { useNavigate } from "react-router-dom";
 
-const baseURL="http://192.168.20.50:8080/list-users"
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  let [ready, setReady] = useState(false);
+  const {getBaseURL} = useContext(Context)
+  let navigate = useNavigate();
 
   useEffect(() => {
-      axios
-      .get(baseURL)
-      .then((response) => {
-        setUsers(response.data);
-        ready = users.length===0 ? setReady(false): setReady(true)
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      })
-
-    console.log(users);
+    axios
+    .get(getBaseURL+"list-users")
+    .then((response) => {
+      setUsers(response.data);
+    })
+    .catch((error) => {
+      navigate("login")
+      console.error("Error fetching user data:", error);
+    })
   }, [ ]);
-
-  if (ready) {
-    return (
-      <div>
-        <h1>No pudimos traer los datos</h1>
-      </div>
-    );
-  }
 
   return (
     <div>

@@ -1,37 +1,26 @@
-import { useState } from "react";
-import axios from "axios";
+import { Context } from "../context/Context"
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-const baseURL = "http://192.168.20.50:8080/save";
+
+
 
 function SaveUsers() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rol, setRol] = useState(0);
+  const {manejarSubmitSave} = useContext(Context)
   let navigate = useNavigate();
 
   function handlerSubmit(e) {
     e.preventDefault();
-    manejarSubmit({ email, password, rol });
+    if(manejarSubmitSave({ email, password, rol }) === 200){
+      navigate("/list-users")
+    }else if(manejarSubmitSave({ email, password, rol }) === 401){
+      console.log("No admitido")
+    }
     setEmail("");
     setPassword("");
     setRol("");
-  }
-
-  function manejarSubmit(form) {
-    axios
-      .post(baseURL, form)
-      .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-          navigate("/list-users");
-        } else if (response.status === 401) {
-          console.log("No admitido");
-        }
-      })
-      .catch((err) => {
-        navigate("/list-users");
-        console.log(err);
-      });
   }
 
   return (
