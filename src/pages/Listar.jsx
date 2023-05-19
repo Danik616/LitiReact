@@ -8,9 +8,11 @@ const UserList = () => {
   const {getBaseURL} = useContext(Context)
   let navigate = useNavigate();
 
+
+
   useEffect(() => {
     axios
-    .get(getBaseURL+"list-users")
+    .get(getBaseURL()+"list-users")
     .then((response) => {
       setUsers(response.data);
     })

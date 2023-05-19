@@ -1,5 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext} from "react";
 import axios from "axios";
+
 
 const baseURL = "http://192.168.20.50:8080/";
 
@@ -29,20 +30,25 @@ export function ContextProvider(props) {
   }
 
   function manejarSubmitLogin(form) {
-    axios
+    return new Promise((resolve, reject)=> {
+      let code = ""
+      axios
       .post(baseURL + "login", form)
       .then((response) => {
-        if (response.status == 200) {
-          return 200;
-        } else if (response.status == 401) {
-          return 401;
+        if (response.statusText === "OK") {
+          code=response.statusText
+        } else if (response.statusText == "Unauthorized") {
           console.log("No admitido");
+          code=response.statusText
         }
+        resolve(code)
       })
       .catch((err) => {
-        return 401;
+        code="Unauthorized"
+        resolve(code)
         console.log(err);
       });
+    })
   }
 
   return (
@@ -50,7 +56,7 @@ export function ContextProvider(props) {
       value={{
         manejarSubmitSave,
         manejarSubmitLogin,
-        getBaseURL,
+        getBaseURL
       }}
     >
       {props.children}
