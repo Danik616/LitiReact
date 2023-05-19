@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const baseURL="http://localhost:8080/list-users"
+const baseURL="http://192.168.20.50:8080/list-users"
 const UserList = () => {
   const [users, setUsers] = useState([]);
   let [ready, setReady] = useState(false);

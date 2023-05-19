@@ -1,7 +1,7 @@
 import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom"
-const baseURL="http://localhost:8080/login"
+const baseURL="http://192.168.20.50:8080/login"
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

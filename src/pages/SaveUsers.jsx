@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const baseURL = "http://localhost:8080/save";
+const baseURL = "http://192.168.20.50:8080/save";
 
 function SaveUsers() {
   const [email, setEmail] = useState("");
