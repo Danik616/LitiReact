@@ -58,7 +58,7 @@ const Login = (props) => {
       <section id="st-login" className="mt-5">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col col-xl-10">
+            <div className="col col-xl-10 col-lg-10">
               <div className="card rounded-5">
                 <div className="row g-0">
                   <div className="col-md-6 col-lg-5 d-none d-md-block">
