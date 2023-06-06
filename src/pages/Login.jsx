@@ -3,14 +3,14 @@ import { useNavigate} from "react-router-dom";
 import { Context } from "../context/Context";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
   const { manejarSubmitLogin } = useContext(Context);
   const navigate = useNavigate();
 
   function handlerSubmit(e) {
     e.preventDefault();
-    manejarSubmitLogin({ email, password }).then((code) => {
+    manejarSubmitLogin({ username, password }).then((code) => {
       if (code === "OK") {
         navigate("/list-users")
       } else if (code === "Unauthorized") {
@@ -23,9 +23,9 @@ const Login = () => {
     <>
       <form onSubmit={handlerSubmit}>
         <input
-          placeholder="Correo Electronico"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          placeholder="Username"
+          onChange={(e) => setUser(e.target.value)}
+          value={username}
         />
         <input
           placeholder="Contraseña"

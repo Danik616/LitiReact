@@ -2,7 +2,7 @@ import { createContext} from "react";
 import axios from "axios";
 
 
-const baseURL = "http://192.168.20.50:8080/";
+const baseURL = "http://192.168.0.230:8080/";
 
 export const Context = createContext();
 
