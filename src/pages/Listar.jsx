@@ -17,7 +17,7 @@ const UserList = () => {
       setUsers(response.data);
     })
     .catch((error) => {
-      navigate("login")
+      navigate("/login")
       console.error("Error fetching user data:", error);
     })
   }, [ ]);
@@ -27,9 +27,9 @@ const UserList = () => {
       <h1>User List</h1>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>
-            <p>Email: {user.email}</p>
-            <p>Password: {user.password}</p>
+          <li key={user.usuarioId}>
+            <p>Email: {user.usuarioCorreo}</p>
+            <p>Password: {user.usuarioClave}</p>
           </li>
         ))}
       </ul>

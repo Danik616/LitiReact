@@ -2,6 +2,7 @@ import { createContext} from "react";
 import axios from "axios";
 
 
+
 const baseURL = "http://192.168.0.230:8080/";
 
 export const Context = createContext();
@@ -36,6 +37,31 @@ export function ContextProvider(props) {
     })
   }
 
+  function manejarFindById(form) {
+    return new Promise((resolve, reject) => {
+      
+      let code= ""
+      let usuario = null
+      axios
+      .post(baseURL + "find-user-by-id", form)
+      .then((response) => {
+        if (response.statusText === "OK") {
+          usuario=response.data
+          code=response.statusText
+        } else if (response.statusText == "Unauthorized") {
+          usuario=null
+          code=response.statusText
+        }
+        resolve({code, usuario})
+      })
+      .catch((err) => {
+        code="Unauthorized"
+        resolve({code, usuario})
+        console.log(err);
+      });
+    })
+  }
+
   function manejarSubmitLogin(form) {
     return new Promise((resolve, reject)=> {
       let code = ""
@@ -62,7 +88,8 @@ export function ContextProvider(props) {
       value={{
         manejarSubmitSave,
         manejarSubmitLogin,
-        getBaseURL
+        getBaseURL,
+        manejarFindById
       }}
     >
       {props.children}

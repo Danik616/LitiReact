@@ -6,7 +6,7 @@ import urlImgLogo from "./../assets/img/img-login.jpg";
 import urlImgLogoLiti from "./../assets/img/icon-liti-login.png";
 
 const Login = () => {
-  const [username, setUser] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [ready, setReady] = useState(false);
 
@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     manejarSubmitLogin({ username, password }).then((code) => {
       if (code === "OK") {
-        navigate("/list-users");
+        navigate("/find-by-username");
       } else if (code === "Unauthorized") {
         setReady(true);
         console.log("No admitido");
