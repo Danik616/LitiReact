@@ -10,14 +10,22 @@ function SaveUsers() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRol] = useState(0);
+  const [localidadId, setLocalidadId] = useState(0)
+  const [tpDocumentoId, setTpDocumentoId] = useState("")
+  const [usuarioIdentificacion, setUsuarioIdentificacion] = useState("")
+  const [usuarioEstado, setUsuarioEstado] = useState("")
+  const [usuarioId, setUsuarioId] = useState("")
+  const [nombres, setNombres] = useState("")
+  const [apellidos, setApellidos] = useState("")
+  const [perfilId, setPerfilId] = useState(0)
   const {manejarSubmitSave} = useContext(Context)
   let navigate = useNavigate();
 
   function handlerSubmit(e) {
     e.preventDefault();
-    manejarSubmitSave({ email, password, role }).then((code) => {
+    manejarSubmitSave({ email, password, localidadId, tpDocumentoId, usuarioIdentificacion, usuarioEstado, usuarioId, nombres, apellidos, perfilId, role }).then((code) => {
       if (code === "Accepted") {
-        navigate("/list-users")
+        navigate("/find-by-username")
       } else if (code === "Unauthorized") {
         console.log("No admitido");
       } else if(response.statusText === "Bad Request"){
