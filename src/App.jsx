@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserList from "./pages/Listar";
 import Login from "./pages/Login";
 import SaveUsers from "./pages/SaveUsers";
+import "bootstrap/dist/css/bootstrap.css";
+import Unauthorized from "./pages/Unauthorized";
 
 const App = () => {
   return (
@@ -11,6 +13,7 @@ const App = () => {
         <Route path="/list-users" element={<UserList />} />
         <Route path="/login" element={<Login />} />
         <Route path="/save" element={<SaveUsers />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
       </Routes>
     </Router>
   );
