@@ -86,8 +86,8 @@ const Login = () => {
                         <div className="form-outline mb-2">
                           <input
                             className="form-control form-control-lg text-uppercase"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
+                            onChange={(e) => setUsername(e.target.value)}
+                            value={username}
                           />
                           <label className="form-label">Usuario</label>
                         </div>
